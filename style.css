@@ -1,0 +1,491 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #61dafb;
+    --primary-dark: #41a7c7;
+    --background-dark: #282c34;
+    --container-dark: #343a46;
+    --text-light: #f0f0f0;
+    --success-color: rgba(0, 255, 0, 0.5);
+    --error-color: rgba(255, 0, 0, 0.5);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --border-radius-lg: 16px;
+    --border-radius-md: 12px;
+    --border-radius-sm: 8px;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+    --font-size-small: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-medium: 1.125rem;
+    --font-size-large: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 2rem;
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+    --icon-width: 30px; /* Стандартная ширина для иконок */
+}
+
+body {
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    line-height: 1.6;
+    padding: var(--spacing-md);
+}
+
+/* App container layout */
+#app-container {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xl);
+    width: 95%;
+    max-width: 1280px;
+    padding: var(--spacing-md);
+    align-items: flex-start; /* Align items at the top */
+    height: auto; /* Changed from fixed height */
+    max-height: 850px;
+}
+
+/* Game container */
+#game-container {
+    max-width: 520px;
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--container-dark);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    height: 100%; /* Take full height */
+}
+
+/* Sidebar container */
+#sidebar {
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+    height: 100%; /* Take full height */
+}
+
+/* Боковые блоки */
+.sidebar-section {
+    background-color: var(--container-dark);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-top: 3px solid var(--primary-color);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Распределяем высоту между тремя блоками sidebar */
+#sidebar .sidebar-section:nth-child(1) {
+    flex: 1;
+}
+
+#sidebar .sidebar-section:nth-child(2) {
+    flex: 1;
+}
+
+#sidebar .sidebar-section:nth-child(3) {
+    flex: 1;
+}
+
+/* Заголовок игры */
+h1 {
+    color: var(--primary-color);
+    text-align: center;
+    margin: 0 0 var(--spacing-sm) 0;
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+
+h1 i, h2 i {
+    margin-right: var(--spacing-sm);
+}
+
+/* Info panel */
+#info-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 0 var(--spacing-sm) 0;
+    padding: var(--spacing-xs) var(--spacing-md);
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: var(--border-radius-sm);
+    flex-shrink: 0;
+}
+
+#level-display, #score-display {
+    font-size: var(--font-size-medium);
+    font-weight: 600;
+    padding: var(--spacing-xs);
+}
+
+#level-display i, #score-display i {
+    margin-right: var(--spacing-xs);
+    color: var(--primary-color);
+}
+
+/* Game board - основная часть игрового пространства */
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: var(--spacing-md);
+    width: 100%;
+    max-width: 420px;
+    padding: var(--spacing-sm) 0;
+    margin: 0 auto;
+    align-self: center;
+    flex: 1;
+    place-items: center;
+}
+
+/* Нижние элементы интерфейса */
+#message-display {
+    width: 100%;
+    text-align: center;
+    min-height: 2.75rem;
+    font-size: var(--font-size-medium);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.3px;
+    margin: var(--spacing-sm) 0;
+    flex-shrink: 0;
+}
+
+#message-display i {
+    margin-right: var(--spacing-sm);
+    font-size: var(--font-size-large);
+}
+
+/* Start button */
+#start-button {
+    background-color: var(--primary-color);
+    color: var(--background-dark);
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-medium);
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color var(--transition-medium), 
+                transform var(--transition-fast), 
+                box-shadow var(--transition-medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+    margin-bottom: var(--spacing-xs);
+}
+
+#start-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+#start-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Адаптивность */
+@media (max-width: 1000px) {
+    #app-container {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        max-height: none;
+    }
+    
+    #game-container {
+        height: auto;
+    }
+    
+    #sidebar {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+    }
+    
+    #sidebar .sidebar-section {
+        flex: none;
+    }
+}
+
+@media (max-width: 600px) {
+    :root {
+        --spacing-md: 0.8rem;
+        --spacing-lg: 1.2rem;
+        --spacing-xl: 1.5rem;
+        --icon-width: 28px;
+    }
+    
+    #game-container {
+        padding: var(--spacing-lg);
+    }
+    
+    #game-board {
+        grid-gap: var(--spacing-md);
+    }
+    
+    h1 {
+        font-size: var(--font-size-xl);
+    }
+    
+    #level-display, #score-display {
+        font-size: var(--font-size-base);
+    }
+    
+    .sidebar-section h2 {
+        font-size: var(--font-size-medium);
+    }
+    
+    #message-display {
+        font-size: var(--font-size-base);
+        padding: var(--spacing-sm);
+    }
+    
+    #start-button {
+        padding: var(--spacing-sm) var(--spacing-lg);
+    }
+    
+    .sidebar-section li,
+    .metric {
+        gap: 6px;
+    }
+}
+
+@media (max-width: 400px) {
+    :root {
+        --icon-width: 24px;
+    }
+    
+    body {
+        padding: var(--spacing-xs);
+    }
+    
+    #app-container {
+        width: 100%;
+        padding: var(--spacing-xs);
+    }
+    
+    h1 {
+        font-size: var(--font-size-large);
+    }
+    
+    .sidebar-section li,
+    .metric {
+        gap: 5px;
+    }
+}
+
+/* Shape styles */
+.shape {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), 
+                box-shadow var(--transition-fast), 
+                transform var(--transition-fast);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.shape:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px 2px rgba(255, 255, 255, 0.2);
+}
+
+.shape.active {
+    box-shadow: 0 0 20px 5px rgba(255, 255, 255, 0.7);
+    transform: scale(1.08);
+}
+
+.shape.correct {
+    box-shadow: 0 0 15px 3px var(--success-color);
+    transform: scale(1.05);
+}
+
+.shape.wrong {
+    box-shadow: 0 0 15px 3px var(--error-color);
+    transform: scale(0.95);
+}
+
+/* Sidebar section headers */
+.sidebar-section h2 {
+    color: var(--primary-color);
+    font-size: var(--font-size-large);
+    margin-bottom: var(--spacing-md);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-bottom: none !important; /* Prevent any border */
+}
+
+/* Override for first sidebar section to remove any dividers */
+#sidebar .sidebar-section:first-child * {
+    border-bottom: none !important;
+    border-top: none !important;
+}
+
+#sidebar .sidebar-section:first-child ul {
+    margin-top: 0;
+}
+
+.sidebar-section p {
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+    letter-spacing: 0.2px;
+    color: rgba(240, 240, 240, 0.9);
+    text-align: left;
+    padding: 0 var(--spacing-xs);
+}
+
+/* Специальный стиль для подзаголовка секции Brain Training */
+.sidebar-section .subheading {
+    color: var(--text-light);
+    font-weight: 500;
+    font-size: var(--font-size-base);
+    text-align: left;
+    line-height: 1.5;
+    margin-bottom: 0;
+}
+
+.sidebar-section ul {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.brain-training-list {
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.sidebar-section:first-child ul {
+    border-top: none;
+}
+
+/* Общие стили для списков и метрик */
+.sidebar-section li,
+.metric {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.5;
+    display: grid;
+    grid-template-columns: var(--icon-width) 1fr;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar-section li:last-child {
+    margin-bottom: 0;
+}
+
+/* Стиль для иконок */
+.sidebar-section li i,
+.metric-name i {
+    color: var(--primary-color);
+    font-size: var(--font-size-medium);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Метрики */
+.metric {
+    justify-content: space-between;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 0;
+    grid-template-columns: var(--icon-width) 1fr auto;
+    column-gap: 8px;
+}
+
+.metric:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.metric:first-child {
+    padding-top: 0;
+}
+
+.metric-name {
+    font-weight: normal;
+    letter-spacing: 0.2px;
+    display: contents; /* Позволяет иконке и тексту быть отдельными ячейками в grid */
+}
+
+.metric-value {
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: var(--font-size-medium);
+    min-width: 30px;
+    text-align: right;
+    grid-column: 3;
+}
+
+/* Fact box */
+#fact {
+    color: var(--text-light);
+    padding: var(--spacing-md);
+    background-color: rgba(97, 218, 251, 0.08);
+    border-radius: var(--border-radius-sm);
+    position: relative;
+    padding-left: 38px;
+    line-height: 1.6;
+    letter-spacing: 0.2px;
+}
+
+#fact::before {
+    content: '💡';
+    position: absolute;
+    left: var(--spacing-sm);
+    top: var(--spacing-md);
+    font-size: var(--font-size-large);
+}
+
+/* Animation for shapes */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.shape:active {
+    animation: pulse 0.3s ease-in-out;
+} 
